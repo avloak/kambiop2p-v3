@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+export function generateStaticParams() {
+  return [];
+}
+
 export default function Trade({ params }: { params: { id: string } }) {
   const router = useRouter();
   const [trade, setTrade] = useState<any>(null);

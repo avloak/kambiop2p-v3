@@ -3,6 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+export function generateStaticParams() {
+  return [];
+}
+
 export default function Rating({ params }: { params: { id: string } }) {
   const router = useRouter();
   const [rating, setRating] = useState(0);

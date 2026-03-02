@@ -4,7 +4,7 @@ service: kambiop2p-usuarios
 
 provider:
   name: aws
-  runtime: python3.11
+  runtime: python3.10
   stage: ${opt:stage, 'dev'}
   region: us-east-1
   iam:

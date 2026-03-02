@@ -106,8 +106,6 @@ resources:
             Projection:
               ProjectionType: ALL
 
-plugins:
-  - serverless-python-requirements
 
 custom:
   pythonRequirements:

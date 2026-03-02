@@ -85,8 +85,6 @@ resources:
           - AttributeName: bank_name
             KeyType: HASH
 
-plugins:
-  - serverless-python-requirements
 
 custom:
   pythonRequirements:

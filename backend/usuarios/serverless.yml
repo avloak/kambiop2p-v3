@@ -86,8 +86,6 @@ resources:
           - AttributeName: user_id
             KeyType: HASH
 
-plugins:
-  - serverless-python-requirements
 
 custom:
   pythonRequirements:

@@ -1,6 +1,6 @@
 import TradeClient from './TradeClient';
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return [];
 }
 

@@ -1,6 +1,6 @@
 import RatingClient from './RatingClient';
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return [];
 }
 

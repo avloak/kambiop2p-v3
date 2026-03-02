@@ -1,4 +1,6 @@
-service: kambiop2p-frontend
+org: grupo4utecv3
+app: kambiop2p
+service: kambiop2p-v3-frontend
 
 provider:
   name: aws
@@ -13,7 +15,7 @@ plugins:
 
 custom:
   s3Sync:
-    - bucketName: kambiop2p-frontend-${self:provider.stage}
+    - bucketName: kambiop2p-v3-frontend-${self:provider.stage}
       localDir: out
       acl: public-read
 
@@ -22,7 +24,7 @@ resources:
     WebsiteBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: kambiop2p-frontend-${self:provider.stage}
+        BucketName: kambiop2p-v3-frontend-${self:provider.stage}
         WebsiteConfiguration:
           IndexDocument: index.html
           ErrorDocument: 404.html
@@ -35,13 +37,13 @@ resources:
     WebsiteBucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
-        Bucket: !Ref WebsiteBucket
+        Bucket: kambiop2p-v3-frontend-${self:provider.stage}
         PolicyDocument:
           Statement:
             - Effect: Allow
               Principal: '*'
               Action: 's3:GetObject'
-              Resource: !Sub '${WebsiteBucket.Arn}/*'
+              Resource: 'arn:aws:s3:::kambiop2p-v3-frontend-${self:provider.stage}/*'
 
   Outputs:
     WebsiteURL:

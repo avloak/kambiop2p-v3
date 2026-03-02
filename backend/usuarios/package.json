@@ -1,0 +1,9 @@
+{
+  "name": "kambiop2p-usuarios",
+  "version": "1.0.0",
+  "description": "Microservicio de Usuarios - KambioP2P",
+  "devDependencies": {
+    "serverless": "^3.38.0",
+    "serverless-python-requirements": "^6.1.0"
+  }
+}

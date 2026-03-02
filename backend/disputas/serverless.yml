@@ -1,0 +1,83 @@
+service: kambiop2p-disputas
+
+provider:
+  name: aws
+  runtime: python3.11
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  iam:
+    role: arn:aws:iam::${aws:accountId}:role/LabRole
+  environment:
+    DISPUTES_TABLE: ${self:service}-disputes-${self:provider.stage}
+
+functions:
+  openDispute:
+    handler: handler.open_dispute
+    events:
+      - http:
+          path: disputes/open
+          method: post
+          cors: true
+
+  getDispute:
+    handler: handler.get_dispute
+    events:
+      - http:
+          path: disputes/{id}
+          method: get
+          cors: true
+
+  resolveDispute:
+    handler: handler.resolve_dispute
+    events:
+      - http:
+          path: disputes/{id}/resolve
+          method: post
+          cors: true
+
+  listDisputes:
+    handler: handler.list_disputes
+    events:
+      - http:
+          path: disputes
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    DisputesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DISPUTES_TABLE}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: trade_id
+            AttributeType: S
+          - AttributeName: status
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: TradeIndex
+            KeySchema:
+              - AttributeName: trade_id
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+          - IndexName: StatusIndex
+            KeySchema:
+              - AttributeName: status
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: false
+    layer: false

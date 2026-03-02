@@ -1,0 +1,9 @@
+{
+  "name": "kambiop2p-mercado",
+  "version": "1.0.0",
+  "description": "Microservicio de Mercado - KambioP2P",
+  "devDependencies": {
+    "serverless": "^3.38.0",
+    "serverless-python-requirements": "^6.1.0"
+  }
+}
